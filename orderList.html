@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            * {
+                padding: 5px;
+                margin: 0px 0px 5px;
+            }
+
+            #app {
+                margin-top: 20px;
+                display: flex;
+                justify-content: center;
+            }
+
+            .input-box {
+                width: 270px;
+            }
+
+            table, th, td{
+                width: 270px;
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+        </style>
+    </head>
+    <body>
+        <h2 style="text-align: center; text-decoration: underline;">Order Maker</h2>
+        <div id="app">
+            
+            <div class="input-box">
+                <input type="text" placeholder="Enter Order Name" v-model="orderData.name"><br>
+                <small style="color: red;" v-if="errorStatus.nameStatus">*Order Name Field is required</small><br>
+                <input type="number" placeholder="Enter Qty" v-model="orderData.qty"><br>
+                <small style="color: red;" v-if="errorStatus.qtyStatus">*Order Quantity Field is required</small><br>
+                <button @click="addOrder()">Add</button>
+                <button @click="clear()">Cancel</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in items">
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td style="text-align: center;">{{ item.qty }}</td>
+                        <td><button @click="remove(item)">Remove</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        
+    </body>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="app.js"></script>
+</html>
